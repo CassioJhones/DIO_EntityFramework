@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
 using WebApplication1.Context;
 using WebApplication1.Entities;
 
@@ -12,27 +11,40 @@ public class ContatoController : ControllerBase
     private readonly AgendaContext _context;
     public ContatoController(AgendaContext context)
     {
-        _context = context;}
+        _context = context;
+    }
 
     [HttpPost]
-    public IActionResult Create(Contato contato){
+    public IActionResult Create(Contato contato)
+    {
         _context.Add(contato);
         _context.SaveChanges();
 
-        return Ok(contato);}
+        return Ok(contato);
+    }
 
     [HttpGet("{id}")]
-    public IActionResult ObterID(int id){
+    public IActionResult ObterID(int id)
+    {
         var contato = _context.Contatos.Find(id);
         if (contato == null)
             return NotFound();
 
-        return Ok(contato);}
+        return Ok(contato);
+    }
+
+    [HttpGet("TodosContatos")]
+    public IActionResult TodosContatos(string nome)
+    {
+        var contatos = _context.Contatos.Where(x => x.Nome.Contains(nome));
+        return Ok(contatos);
+    }
 
     [HttpPut("{id}")]
-    public IActionResult Atualizar(int id, Contato contato){
+    public IActionResult Atualizar(int id, Contato contato)
+    {
         var contatoBanco = _context.Contatos.Find(id);
-        if(contatoBanco == null)
+        if (contatoBanco == null)
             return NotFound();
 
         contatoBanco.Nome = contato.Nome;
@@ -42,10 +54,12 @@ public class ContatoController : ControllerBase
         _context.Contatos.Update(contatoBanco);
         _context.SaveChanges();
 
-        return Ok(contatoBanco);}
-    
+        return Ok(contatoBanco);
+    }
+
     [HttpDelete("{id}")]
-    public IActionResult Deletar(int id){
+    public IActionResult Deletar(int id)
+    {
         var contatoBanco = _context.Contatos.Find(id);
         if (contatoBanco == null)
             return NotFound();
@@ -54,5 +68,4 @@ public class ContatoController : ControllerBase
         _context.SaveChanges();
         return NoContent();
     }
-
 }
