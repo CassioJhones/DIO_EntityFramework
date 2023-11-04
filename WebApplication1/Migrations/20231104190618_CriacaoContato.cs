@@ -2,35 +2,34 @@
 
 #nullable disable
 
-namespace WebApplication1.Migrations
+namespace WebApplication1.Migrations;
+
+/// <inheritdoc />
+public partial class CriacaoContato : Migration
 {
     /// <inheritdoc />
-    public partial class CriacaoContato : Migration
-    {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {//Criação da tabela com as colunas
-            migrationBuilder.CreateTable(
-                name: "Contatos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contatos", x => x.Id);
-                });
-        }
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {//Criação da tabela com as colunas
+        migrationBuilder.CreateTable(
+            name: "Contatos",
+            columns: table => new
+            {
+                Id = table.Column<int>(type: "int", nullable: false)
+                    .Annotation("SqlServer:Identity", "1, 1"),
+                Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                Telefone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                Ativo = table.Column<bool>(type: "bit", nullable: false)
+            },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_Contatos", x => x.Id);
+            });
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Contatos");
-        }
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropTable(
+            name: "Contatos");
     }
 }

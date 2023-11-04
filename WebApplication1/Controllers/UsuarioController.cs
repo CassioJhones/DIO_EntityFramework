@@ -23,7 +23,7 @@ public class UsuarioController : ControllerBase
     public IActionResult Apresentar(string nome)
     {
         var Hora = DateTime.Now.ToShortDateString();
-        var mensagem = $"Olá {nome} seja bem-vindo! agora é {Hora}";
+        var mensagem = $"Olá {nome} seja bem-vindo! hoje é {Hora}";
         return Ok(new { mensagem });
     }
 }
