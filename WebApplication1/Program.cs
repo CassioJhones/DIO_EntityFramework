@@ -24,3 +24,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+
+//dotnet-ef migrations --project WebApplication1 add CriacaoContato
